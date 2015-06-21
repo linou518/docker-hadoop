@@ -1,0 +1,14 @@
+<configuration>
+    <property>
+        <name>dfs.name.dir</name>
+        <value>file://{{HADOOP_DATA_DIR}}/tmp/dfs/name</value>
+    </property>
+    <property>
+        <name>dfs.data.dir</name>
+        <value>file://{{HADOOP_DATA_DIR}}/tmp/dfs/data</value>
+    </property>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+</configuration>

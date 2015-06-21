@@ -1,0 +1,24 @@
+#/bin/bash
+
+HADOOP_VERSION=${HADOOP_VERSION:-2.7.0}
+
+apt-prepare && \
+apt-get install -y build-essential cmake zlib1g-dev g++ autoconf automake libtool cmake zlib1g-dev pkg-config libssl-dev && \
+# install maven && \
+curl -jksSL https://archive.apache.org/dist/maven/binaries/apache-maven-3.2.2-bin.tar.gz | tar -xzf - -C /tmp/ && \
+ln -s /tmp/apache-maven-3.2.2/bin/mvn /usr/bin/mvn && \
+# install protobuf && \
+curl -jksSL https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.gz | tar -xzf - -C /tmp/ && \
+cd /tmp/protobuf-2.5.0 && \
+./configure && \
+make && \
+# hadoop stuff && \
+curl -jksSL https://archive.apache.org/dist/hadoop/core/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}-src.tar.gz | tar -xzf - -C /tmp/ && \
+cd /data/hadoop-${HADOOP_VERSION}-src/ && \
+export HADOOP_PROTOC_PATH=/tmp/protobuf-2.5.0/src/protoc && \
+mvn package -Pdist,native -DskipTests -Dtar -Dmaven.javadoc.skip=true && \
+mkdir -p /data/hadoop-native-debian-64_${HADOOP_VERSION} && \
+cd /data && \
+mkdir -p hadoop-native-debian-64_${HADOOP_VERSION} && \
+cp /tmp/hadoop-${HADOOP_VERSION}-src/hadoop-dist/target/hadoop-${HADOOP_VERSION}/lib/native/* /data/hadoop-native-debian-64_${HADOOP_VERSION}/ && \
+tar -cvzf hadoop-native-debian-64_${HADOOP_VERSION}.tar.gz hadoop-native-debian-64_${HADOOP_VERSION}

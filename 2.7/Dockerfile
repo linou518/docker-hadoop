@@ -48,10 +48,10 @@ RUN \
   ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa && \
   cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys && \
   echo "Download the native support libraries" && \
-  curl -jksSL https://dl.bintray.com/docxs/docxs-bin/#hadoop-native-debian-64_$HADOOP_VERSION.tar.gz | tar -xzf - -C /tmp/ && \
+  curl -jksSL http://dl.bintray.com/docxs/docxs-bin/hadoop-native-debian-64_${HADOOP_VERSION}.tar.gz | tar -xzf - -C /tmp/ && \
   echo "Get hadoop" && \
-  curl -jksSL http://www.eu.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz | tar -xzf - -C /opt && \
-  ln -s /opt/hadoop-$HADOOP_VERSION $HADOOP_HOME && \
+  curl -jksSL http://www.eu.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | tar -xzf - -C /opt && \
+  ln -s /opt/hadoop-${HADOOP_VERSION} $HADOOP_HOME && \
   echo "Update the hadoop-env.sh" && \
   sed -i "/^export JAVA_HOME/ s:.*:export JAVA_HOME=$JAVA_HOME\nexport HADOOP_PREFIX=$HADOOP_PREFIX\nexport HADOOP_HOME=$HADOOP_HOME\n:" $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh && \
   sed -i "/^export HADOOP_CONF_DIR/ s:.*:export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop/:" $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh && \

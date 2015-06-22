@@ -19,6 +19,5 @@ export HADOOP_PROTOC_PATH=/tmp/protobuf-2.5.0/src/protoc && \
 mvn package -Pdist,native -DskipTests -Dtar -Dmaven.javadoc.skip=true && \
 mkdir -p /data/hadoop-native-debian-64_${HADOOP_VERSION} && \
 cd /data && \
-mkdir -p hadoop-native-debian-64_${HADOOP_VERSION} && \
 cp /tmp/hadoop-${HADOOP_VERSION}-src/hadoop-dist/target/hadoop-${HADOOP_VERSION}/lib/native/* /data/hadoop-native-debian-64_${HADOOP_VERSION}/ && \
 tar -cvzf hadoop-native-debian-64_${HADOOP_VERSION}.tar.gz hadoop-native-debian-64_${HADOOP_VERSION}

@@ -14,7 +14,7 @@ cd /tmp/protobuf-2.5.0 && \
 make && \
 # hadoop stuff && \
 curl -jksSL https://archive.apache.org/dist/hadoop/core/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}-src.tar.gz | tar -xzf - -C /tmp/ && \
-cd /data/hadoop-${HADOOP_VERSION}-src/ && \
+cd /tmp/hadoop-${HADOOP_VERSION}-src/ && \
 export HADOOP_PROTOC_PATH=/tmp/protobuf-2.5.0/src/protoc && \
 mvn package -Pdist,native -DskipTests -Dtar -Dmaven.javadoc.skip=true && \
 mkdir -p /data/hadoop-native-debian-64_${HADOOP_VERSION} && \

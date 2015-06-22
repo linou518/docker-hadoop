@@ -73,6 +73,9 @@ RUN \
   echo "Port 2122" >> /etc/ssh/sshd_config && \
   apt-cleanup
 
+# set additional environment variables
+ENV PATH $PATH:$HADOOP_PREFIX/bin
+
 # Add configuration files
 COPY config /src/config
 

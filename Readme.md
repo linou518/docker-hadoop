@@ -24,7 +24,7 @@ docker pull docxs/hadoop:<hadoop_version>
 ### Ephemeral data
 ```shell
 docker run -it [--name <name>] \
-           docxs/hadoop:<hadoop_version> bootstrap -bash
+           docxs/hadoop:<hadoop_version> -bash
 ```
 
 ### Persistent data
@@ -33,7 +33,7 @@ Running it for the first time
 docker run -it [--name <name>] \
            -v <data_folder>:/data \
            docxs/hadoop:<hadoop_version> \
-           bootstrap -bash
+           -bash
 ```
 
 Running it again...
@@ -41,7 +41,7 @@ Running it again...
 docker run -it [--name <name>] \
            -v <data_folder>:/data \
            docxs/hadoop:<hadoop_version> \
-           bootstrap -noformat -bash
+           -noformat -bash
 ```
 
 
@@ -49,14 +49,14 @@ docker run -it [--name <name>] \
 When attached to the container, you can run the following example
 ```shell
 # create an input folder on hdfs and add some files to it
-$HADOOP_PREFIX/bin/hdfs dfs -mkdir -p input
-$HADOOP_PREFIX/bin/hdfs dfs -put $HADOOP_PREFIX/etc/hadoop/*.xml input
+hdfs dfs -mkdir -p input
+hdfs dfs -put $HADOOP_PREFIX/etc/hadoop/*.xml input
 
 # run the example map-reduce job (for 2.7 here)
-$HADOOP_PREFIX/bin/hadoop jar $HADOOP_PREFIX/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.0.jar grep input output 'dfs[a-z.]+'
+hadoop jar $HADOOP_PREFIX/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.0.jar grep input output 'dfs[a-z.]+'
 
 # checkout the output
-$HADOOP_PREFIX/bin/hdfs dfs -cat output/*
+hdfs dfs -cat output/*
 ```
 
 ## Hadoop native libraries

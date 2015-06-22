@@ -90,5 +90,10 @@ COPY bin /bin/
 EXPOSE \
   50010 50020 50070 50075 50090 19888 8030 8031 8032 8033 8040 8042 8088 49707 2122
 
+# Run bootstrap on container launch
+ENTRYPOINT \
+  ["bootstrap"]
+
 # Default command
-CMD ["bootstrap", "-d"]
+CMD \
+  ["-d"]

@@ -91,4 +91,4 @@ EXPOSE \
   50010 50020 50070 50075 50090 19888 8030 8031 8032 8033 8040 8042 8088 49707 2122
 
 # Default command
-CMD ["/bin/bootstrap", "-d"]
+CMD ["bootstrap", "-d"]

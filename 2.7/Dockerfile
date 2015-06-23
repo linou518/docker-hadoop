@@ -44,7 +44,7 @@ RUN apt-prepare \
       openssh-server \
       openssh-client \
       rsync \
- && # passwordless ssh \
+ && echo "setting up passwordless ssh ..." \
  && rm /etc/ssh/ssh_host_dsa_key /etc/ssh/ssh_host_rsa_key \
  && ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key \
  && ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key \
@@ -68,12 +68,12 @@ RUN apt-prepare \
  && cp -f /src/config/root_ssh_config /root/.ssh/config \
  && chmod 600 /root/.ssh/config \
  && chown root:root /root/.ssh/config \
- && # workaround for a docker build error \
+ && echo "workaround for a docker build error ..." \
  && echo "updating permissions ..." \
  && ls -la $HADOOP_PREFIX/etc/hadoop/*-env.sh \
  && chmod +x $HADOOP_PREFIX/etc/hadoop/*-env.sh \
  && ls -la $HADOOP_PREFIX/etc/hadoop/*-env.sh \
- && # fix the 254 error code \
+ && echo "fix the 254 error code ..." \
  && sed  -i "/^[^#]*UsePAM/ s/.*/#&/"  /etc/ssh/sshd_config \
  && echo "UsePAM no" >> /etc/ssh/sshd_config \
  && echo "Port 2122" >> /etc/ssh/sshd_config \

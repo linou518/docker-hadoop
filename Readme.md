@@ -1,4 +1,4 @@
-# Docker-cassandra [![Docker registry](https://img.shields.io/badge/docker-registry-blue.svg)](https://registry.hub.docker.com/u/docxs/hadoop/) [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)]()
+# Docker-hadoop [![Docker registry](https://img.shields.io/badge/docker-registry-blue.svg)](https://registry.hub.docker.com/u/docxs/hadoop/) [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)]()
 
 Hadoop in docker.
 
@@ -21,13 +21,28 @@ docker pull docxs/hadoop:<hadoop_version>
 
 ## Running the container
 
-### Ephemeral data
+### Environment variables
+- `HADOOP_DATA_DIR`: the location of your data within the container. (default: `/data/hadoop/data`)
+- `HADOOP_LOG_DIR`: the location of your hadoop/yarn log files within the container (default: `/data/hadoop/log`)
+
+
+### Options
+
+- `-noformat`: (needs to be the first option) if you don't want an hdfs format to happen upon starting the container (in case you want to keep persistent data)
+- `-d`: if you want to run the container in detached mode
+- `-bash`: if you want to run the container with a shell session
+- `-run`: (followed by a command) if you want the container to immediately execute a command
+
+
+### Examples
+
+#### Ephemeral data
 ```shell
 docker run -it [--name <name>] \
            docxs/hadoop:<hadoop_version> -bash
 ```
 
-### Persistent data
+#### Persistent data
 Running it for the first time
 ```shell
 docker run -it [--name <name>] \
@@ -62,3 +77,13 @@ hdfs dfs -cat output/*
 ## Hadoop native libraries
 The dockerfile downloads the compiled native libraries from bintray. If you want, you can build them yourself.
 All bateries are included in the dockerfile included in the `native_libraries` directory.
+
+
+## License
+
+Licensed under the MIT License. See the LICENSE file for details.
+
+
+## Feedback, bug-reports, requests, ...
+
+Are [welcome](https://github.com/docxs/docker-hadoop/issues)!

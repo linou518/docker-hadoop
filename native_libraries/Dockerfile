@@ -31,6 +31,6 @@ CMD \
   ["/bin/build-native"]
 
 # run the docker container for building the native libraries
-# docker build --rm -t docxs/hadoop-native-libs .
-# docker run -it --rm -v <data_folder_for_binaries>:/data docxs/hadoop-native-libs bash
-# build-native
+# > docker build --rm -t docxs/hadoop-native-libs .
+# > docker run -it --rm -v <data_folder_for_binaries>:/data docxs/hadoop-native-libs bash
+# > build-native
